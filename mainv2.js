@@ -9,7 +9,6 @@ var letsArr = [];
 var mov;
 var corrflag = false;
 var namey;
-
 var con = mysql.createConnection({
   host: "localhost",
   user: "Ben",
@@ -67,7 +66,6 @@ function create(){
     ])
   .then(function(sign) {
 
-
 con.connect(function(err) {
   if (err) throw err;
 
@@ -121,7 +119,7 @@ for (var i = 0; i < result.length; i++) {
       namey = sign2.user2;
       i = result.length;
 
-      restart();
+    restart();
 	  start();
 	  guess();
 
@@ -138,7 +136,6 @@ for (var i = 0; i < result.length; i++) {
   });
 
 });
-
 
 }
 

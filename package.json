@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/G-rant88/node-hangman#readme",
   "dependencies": {
-    "inquirer": "^4.0.0"
+    "inquirer": "^4.0.0",
+    "mysql": "^2.15.0"
   }
 }

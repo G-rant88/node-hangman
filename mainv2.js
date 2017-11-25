@@ -9,6 +9,10 @@ var letsArr = [];
 var mov;
 var corrflag = false;
 var namey;
+var win ;
+var loss ;
+var winy ;
+var lossy ;
 var con = mysql.createConnection({
   host: "localhost",
   user: "Ben",
@@ -70,10 +74,10 @@ function create(){
 con.connect(function(err) {
   if (err) throw err;
 
-   var sql = "INSERT INTO data (username, password) VALUES ?";
+   var sql = "INSERT INTO data (username, password, wins, losses) VALUES ?";
    values = [
 
-   [sign.user, sign.pws]
+   [sign.user, sign.pws, 0, 0]
 
    ];
 
@@ -117,8 +121,14 @@ for (var i = 0; i < result.length; i++) {
      if (sign2.user2 === result[i].username && sign2.pws2 === result[i].password){
 
   console.log("\nWelcome " + sign2.user2);
-      namey = sign2.user2;
-      i = result.length;
+  console.log("\nYour Wins: " + result[i].wins);
+  console.log("\nYour Losses: " + result[i].losses);
+  win = result[i].wins;
+  loss = result[i].losses;
+  winy = win;
+  lossy = loss;
+  namey = sign2.user2;
+  i = result.length;
 
     restart();
 	  start();
@@ -218,6 +228,15 @@ console.log("\nINCORRECT!");
 
 	if (gl === 0){
 
+     loss++;
+
+    var sql = "UPDATE data SET losses = '"+ loss+ "' WHERE losses ='" + lossy + "'";
+     
+        con.query(sql, function (err, result) {
+   if (err) throw err;
+  });
+
+    lossy++;
 		console.log("\nYOU LOST!");
 		console.log("\nThe movie was " + mov.movie + "\n");
 		restart();
@@ -260,6 +279,14 @@ inquirer.prompt([
 
 			if (answer()){
 
+        win++;
+        var sql = "UPDATE data SET wins = '"+ win+ "' WHERE wins ='" + winy + "'";
+     
+        con.query(sql, function (err, result) {
+   if (err) throw err;
+  });
+
+        winy++;
 	console.log("\nYou won!!\n");
 	console.log("the movie was: " + mov.movie + "\n");
 	restart();

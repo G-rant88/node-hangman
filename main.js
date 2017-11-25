@@ -1,12 +1,11 @@
 var inquirer = require("inquirer");
 var gl = 10;
-var movie = ['aliens', 'jaws','taken','thor','rocky', 'shrek', 'inception', 'avatar',
-'predator', 'titanic', 'scarface'];
+var movie = ['top gun', 'blade runner', 'star wars', 'jurassic park', 'eternal sunshine of the spotless mind', 
+'little miss sunshine', 'pulp fiction', 'the wolf of wall street', 'saving private ryan',
+'aliens', 'predator', 'avatar', 'inception', 'the dark knight', 'shrek', 'jaws', 'thor'];
 var Word = require("./word.js");
 var letsArr = [];
 var mov;
-var movJoin;
-var movShow;
 var corrflag = false;
 
 restart();
@@ -16,7 +15,7 @@ guess();
 function start (){
 
 console.log("Movie Name: ");
-console.log(movJoin);
+console.log(mov.letsIn.join(" "));
 }
 
 function restart (){
@@ -24,8 +23,9 @@ function restart (){
  letsArr = [];
  gl = 10;
  mov = new Word (randy());
- movShow = mov.show();
- movJoin = movShow.join(" ");
+ mov.letsIn = [];
+ mov.display();
+
 }
 
 function randy (){
@@ -66,7 +66,7 @@ inquirer.prompt([
 
 			for (var i = 0; i < mov.movie.length; i++) {
 	
-			if (mov.movie[i] !== movShow[i]){
+			if (mov.movie[i] !== mov.letsIn[i]){
 				return false;
 			}
 		}
@@ -75,11 +75,10 @@ inquirer.prompt([
 
 	function correct(){
 
-	movJoin = movShow.join(" ");
-	console.log("CORRECT!");
-	console.log(movJoin);
-	guess();
 
+	console.log("CORRECT!");
+	console.log(mov.letsIn.join(" "));
+	guess();
 }
 	
 function wrong(){
@@ -101,7 +100,7 @@ console.log("INCORRECT!");
 
 	console.log("Guesses Left: " + gl);
 	console.log("Letters Guessed " + letsArr.join(" "));
-	console.log(movJoin);
+	console.log(mov.letsIn.join(" "));
 	guess();
 	}
 }
@@ -127,7 +126,7 @@ inquirer.prompt([
 
 		if (guess1.let.toLowerCase() === mov.movie.charAt([i])){
 		corrflag = true;
-		movShow[i] = mov.movie[i];
+		mov.letsIn[i] = mov.movie[i];
 		letsArr.push(guess1.let.toLowerCase());
 
 			if (answer()){

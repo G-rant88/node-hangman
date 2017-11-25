@@ -14,8 +14,8 @@ guess();
 
 function start (){
 
-console.log("Movie Name: ");
-console.log(mov.letsIn.join(" "));
+console.log("\nMovie Name: \n");
+console.log(mov.letsIn.join(" ") + "\n");
 }
 
 function restart (){
@@ -54,7 +54,7 @@ inquirer.prompt([
 
 		else{
 
-			console.log("BYE!");
+			console.log("\nBYE!\n");
 			return false;
 		}
 
@@ -76,21 +76,21 @@ inquirer.prompt([
 	function correct(){
 
 
-	console.log("CORRECT!");
-	console.log(mov.letsIn.join(" "));
+	console.log("\nCORRECT!\n");
+	console.log(mov.letsIn.join(" ") + "\n");
 	guess();
 }
 	
 function wrong(){
 
-console.log("INCORRECT!");
+console.log("\nINCORRECT!");
 	
 	gl = gl -1;
 
 	if (gl === 0){
 
-		console.log("YOU LOST!");
-		console.log("The movie was " + mov.movie);
+		console.log("\nYOU LOST!\n");
+		console.log("The movie was " + mov.movie + "\n");
 		restart();
 		agains();
 		return false;
@@ -98,9 +98,9 @@ console.log("INCORRECT!");
 
 	else{
 
-	console.log("Guesses Left: " + gl);
-	console.log("Letters Guessed " + letsArr.join(" "));
-	console.log(mov.letsIn.join(" "));
+	console.log("\nGuesses Left: " + gl);
+	console.log("\nLetters Guessed: " + letsArr.join(" "));
+	console.log("\n" + mov.letsIn.join(" ") + "\n");
 	guess();
 	}
 }
@@ -127,12 +127,11 @@ inquirer.prompt([
 		if (guess1.let.toLowerCase() === mov.movie.charAt([i])){
 		corrflag = true;
 		mov.letsIn[i] = mov.movie[i];
-		letsArr.push(guess1.let.toLowerCase());
 
 			if (answer()){
 
-	console.log("You won!!");
-	console.log("the movie was: " + mov.movie);
+	console.log("\nYou won!!");
+	console.log("\nthe movie was: " + mov.movie + "\n");
 	restart();
 	agains();
 	return false;	
@@ -142,6 +141,7 @@ inquirer.prompt([
 
 }	
 	if (corrflag === true) {
+	letsArr.push(guess1.let.toLowerCase());
 	correct();
 	return false;
 	}

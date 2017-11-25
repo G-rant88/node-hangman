@@ -18,6 +18,7 @@ var con = mysql.createConnection({
 });
 
 ask();
+
 function ask(){
 
 console.log("\nWelcome to Movie Hangman Node Madness!!!\n");
@@ -139,10 +140,9 @@ for (var i = 0; i < result.length; i++) {
 
 }
 
-
 function start (){
 
-console.log("\nMovie Name: ");
+console.log("\nMovie Name: \n");
 console.log(mov.letsIn.join(" ") + "\n");
 }
 
@@ -229,7 +229,7 @@ console.log("\nINCORRECT!");
 
 	console.log("\nGuesses Left: " + gl + "\n");
 	console.log("Letters Guessed " + letsArr.join(" ") + "\n");
-	console.log(mov.letsIn.join(" "));
+	console.log(mov.letsIn.join(" ") + "\n");
 	guess();
 	}
 }
@@ -256,11 +256,11 @@ inquirer.prompt([
 		if (guess1.let.toLowerCase() === mov.movie.charAt([i])){
 		corrflag = true;
 		mov.letsIn[i] = mov.movie[i];
-		letsArr.push(guess1.let.toLowerCase());
+		
 
 			if (answer()){
 
-	console.log("You won!!\n");
+	console.log("\nYou won!!\n");
 	console.log("the movie was: " + mov.movie + "\n");
 	restart();
 	agains();
@@ -271,6 +271,7 @@ inquirer.prompt([
 
 }	
 	if (corrflag === true) {
+  letsArr.push(guess1.let.toLowerCase());
 	correct();
 	return false;
 	}

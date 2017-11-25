@@ -8,7 +8,10 @@ var mysql = require('mysql');
 var letsArr = [];
 var mov;
 var corrflag = false;
+var winflag = false;
+var lossflag = false;
 var namey;
+var pwy;
 var win ;
 var loss ;
 var winy ;
@@ -128,6 +131,7 @@ for (var i = 0; i < result.length; i++) {
   winy = win;
   lossy = loss;
   namey = sign2.user2;
+  pwy = sign2.pws2;
   i = result.length;
 
     restart();
@@ -227,7 +231,7 @@ console.log("\nINCORRECT!");
 	gl = gl -1;
 
 	if (gl === 0){
-
+    lossflag = true;
      loss++;
 
     var sql = "UPDATE data SET losses = '"+ loss+ "' WHERE losses ='" + lossy + "'";
@@ -239,12 +243,31 @@ console.log("\nINCORRECT!");
     lossy++;
 		console.log("\nYOU LOST!");
 		console.log("\nThe movie was " + mov.movie + "\n");
+
+  con.query("SELECT * FROM data", function (err, result, fields) {
+    if (err) throw err;
+
+for (var i = 0; i < result.length; i++) {
+
+     if (namey === result[i].username && pwy === result[i].password){
+
+  console.log("Your Wins: " + result[i].wins);
+  console.log("\nYour Losses: " + result[i].losses+ "\n");
+  return false;
+}
+}
+});
+
+  setTimeout(function () {
+
 		restart();
 		agains();
 		return false;
+
+    }, 500); 
 }
 
-	else{
+	else if (lossflag === false){
 
 	console.log("\nGuesses Left: " + gl + "\n");
 	console.log("Letters Guessed " + letsArr.join(" ") + "\n");
@@ -278,7 +301,8 @@ inquirer.prompt([
 		
 
 			if (answer()){
-
+        corrflag = false;
+        winflag = true;
         win++;
         var sql = "UPDATE data SET wins = '"+ win+ "' WHERE wins ='" + winy + "'";
      
@@ -289,9 +313,28 @@ inquirer.prompt([
         winy++;
 	console.log("\nYou won!!\n");
 	console.log("the movie was: " + mov.movie + "\n");
-	restart();
-	agains();
-	return false;	
+
+  con.query("SELECT * FROM data", function (err, result, fields) {
+    if (err) throw err;
+
+for (var i = 0; i < result.length; i++) {
+
+     if (namey === result[i].username && pwy === result[i].password){
+
+  console.log("Your Wins: " + result[i].wins);
+  console.log("\nYour Losses: " + result[i].losses + "\n");
+  return false;
+}
+}
+});
+
+  setTimeout(function () {
+
+    restart();
+    agains();
+    return false;
+
+    }, 500); 
 	}
 		
 	}
@@ -303,7 +346,9 @@ inquirer.prompt([
 	return false;
 	}
 
+if (winflag === false){
 	letsArr.push(guess1.let.toLowerCase());
 	wrong();
+}
 	})
 }

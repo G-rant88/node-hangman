@@ -6,6 +6,7 @@ function Word (movie){
 		this.show = function(){
 
 			return new Array(movie.length).fill("_");
+
 		}
 
 }

@@ -1,11 +1,13 @@
 var inquirer = require("inquirer");
 var gl = 10;
-var movie = ['aliens', 'jaws','taken','thor','rocky', 'shrek'];
+var movie = ['aliens', 'jaws','taken','thor','rocky', 'shrek', 'inception', 'avatar',
+'predator', 'titanic', 'scarface'];
 var Word = require("./word.js");
 var letsArr = [];
 var mov;
 var movJoin;
 var movShow;
+var corrflag = false;
 
 restart();
 start();
@@ -34,7 +36,7 @@ function randy (){
 function agains(){
 inquirer.prompt([
 {
- 		type: "confirm",
+ 	  type: "confirm",
       message: "Play again?",
       name: "conf",
       default: true
@@ -111,7 +113,7 @@ inquirer.prompt([
  		name: "let",
         message: "Guess a letter:",
         validate: function(lets) {
-	        if (lets.length ===1 && letsArr.indexOf(lets) === -1 && isNaN(lets)) {
+	        if (lets.length ===1 && letsArr.indexOf(lets.toLowerCase()) === -1 && isNaN(lets)) {
 	          return true;
 	        }
 	          return false;
@@ -120,12 +122,13 @@ inquirer.prompt([
     }
 	]).then(function(guess1) {
 
+			corrflag = false;
 	for (var i = 0; i < mov.movie.length; i++) {
 
-		if (guess1.let === mov.movie.charAt([i])){
-
+		if (guess1.let.toLowerCase() === mov.movie.charAt([i])){
+		corrflag = true;
 		movShow[i] = mov.movie[i];
-		letsArr.push(guess1.let);
+		letsArr.push(guess1.let.toLowerCase());
 
 			if (answer()){
 
@@ -135,11 +138,16 @@ inquirer.prompt([
 	agains();
 	return false;	
 	}
-		correct();
-		return false;
+		
 	}
-}
-	letsArr.push(guess1.let);
+
+}	
+	if (corrflag === true) {
+	correct();
+	return false;
+	}
+
+	letsArr.push(guess1.let.toLowerCase());
 	wrong();
 	})
 }

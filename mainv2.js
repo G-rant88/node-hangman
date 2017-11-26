@@ -242,7 +242,7 @@ console.log("\nINCORRECT!");
 
     lossy++;
 		console.log("\nYOU LOST!");
-		console.log("\nThe movie was " + mov.movie + "\n");
+		console.log("\nThe movie was: " + mov.movie + "\n");
 
   con.query("SELECT * FROM data", function (err, result, fields) {
     if (err) throw err;

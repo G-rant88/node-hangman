@@ -1,4 +1,5 @@
 var inquirer = require("inquirer");
+const chalk = require("chalk");
 var gl = 10;
 var movie = ['top gun', 'blade runner', 'star wars', 'jurassic park', 'eternal sunshine of the spotless mind', 
 'little miss sunshine', 'pulp fiction', 'the wolf of wall street', 'saving private ryan',
@@ -219,14 +220,14 @@ inquirer.prompt([
 	function correct(){
 
 
-	console.log("\nCORRECT!\n");
+	console.log(chalk.green("\nCORRECT!\n"));
 	console.log(mov.letsIn.join(" ") + "\n");
 	guess();
 }
 	
 function wrong(){
 
-console.log("\nINCORRECT!");
+console.log(chalk.red("\nINCORRECT!"));
 	
 	gl = gl -1;
 

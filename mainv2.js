@@ -168,6 +168,9 @@ function restart (){
  mov = new Word (randy());
  mov.letsIn = [];
  mov.display();
+ corrflag = false;
+ winflag = false;
+ lossflag = false;
 
 }
 

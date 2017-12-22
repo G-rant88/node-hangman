@@ -7,5 +7,8 @@
 <li>save all of your data to a db</li>
 </ul>
 
+<img src="https://media.giphy.com/media/l4EoXlzKiUnqFKa9a/giphy.gif" alt="gif">
+full video demo: (https://www.youtube.com/watch?v=Z0JiiNL2yiQ)
+
 
 
